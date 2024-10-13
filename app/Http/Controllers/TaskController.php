@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::paginate(10);
         return response()->json($tasks);
     }
     public function create()
@@ -63,6 +63,16 @@ class TaskController extends Controller
         $task->delete();
 
         return response()->json(['message' => 'Task deleted successfully.']);
+    }
+    public function restore($id){
+        $task = Task::withTrashed()->findOrFail($id);
+        $task->restore(); // Mengembalikan tugas yang dihapus
+        return response()->json(['message' => 'Tugas berhasil dikembalikan!']);
+    }
+    public function trashed()
+    {
+    $tasks = Task::onlyTrashed()->get();
+    return response()->json($tasks);
     }
 }
 

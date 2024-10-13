@@ -44,6 +44,7 @@
         <table class="w-full mb-4">
             <thead>
                 <tr class="bg-gray-100 border-b border-gray-200">
+                    <th class="px-4 py-2 text-left">No</th>
                     <th class="px-4 py-2 text-left">Title</th>
                     <th class="px-4 py-2 text-left">Description</th>
                     <th class="px-4 py-2 text-right">Actions</th>
@@ -51,6 +52,7 @@
             </thead>
             <tbody>
                 <tr v-for="(taskItem, index) in filteredTasks" :key="taskItem.id" class="border-b border-gray-200"> <!--ini di tambahin kondisi filteredTask-->
+                    <td class="px-4 py-2">{{ index + 1 + (currentPage - 1) * 10 }}</td>
                     <td class="px-4 py-2">{{ taskItem.title }}</td>
                     <td class="px-4 py-2">{{ taskItem.description }}</td>
                     <td class="px-4 py-2 text-right">
@@ -72,9 +74,49 @@
                 </tr>
             </tbody>
         </table>
+
+    <!--untuk Pagination-->
+        <div class="pagination">
+    <button
+        @click="fetchTasks(currentPage - 1)"
+        :disabled="currentPage === 1"
+        class="px-3 py-2 bg-gray-200 rounded mx-1"
+    >
+        Prev
+    </button>
+
+    <button
+        v-for="page in totalPages"
+        :key="page"
+        @click="fetchTasks(page)"
+        :class="{'bg-blue-500 text-white': currentPage === page}"
+        class="px-3 py-2 bg-gray-200 rounded mx-1"
+    >
+        {{ page }}
+    </button>
+
+    <button
+        @click="fetchTasks(currentPage + 1)"
+        :disabled="currentPage === totalPages"
+        class="px-3 py-2 bg-gray-200 rounded mx-1"
+    >
+        Next
+    </button>
+</div>
     </div>
 </template>
+<style>
+.pagination button {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
 
+.pagination button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>
 <script setup>
 import { ref, onMounted, watch, computed } from 'vue';
 import axios from 'axios';
@@ -90,12 +132,15 @@ const isConfirmDeleteOpen = ref(false);
 const errorMessage = ref(null);
 const successMessage = ref(null);
 const searchTerm = ref(''); // Ref untuk menyimpan kata kunci pencarian
+const currentPage = ref(1);  // Halaman saat ini
+const totalPages = ref(0);  // Total halaman
 
-const fetchTasks = async () => {
+const fetchTasks = async (page = 1) => {
     try {
-        const response = await axios.get('/api/tasks');
-        console.log('Fetched Tasks:', response.data);
-        tasks.value = response.data;
+        const response = await axios.get(`/api/tasks?page=${page}`);
+        tasks.value = response.data.data; // 'data' berisi tugas pada halaman saat ini
+        currentPage.value = response.data.current_page;
+        totalPages.value = response.data.last_page;
         errorMessage.value = null;
     } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -195,4 +240,5 @@ const filteredTasks = computed(() => {
         taskItem.description.toLowerCase().includes(lowercasedSearchTerm)
     );
 });
+
 </script>

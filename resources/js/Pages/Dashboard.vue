@@ -22,7 +22,7 @@ import Task from '@/Components/Task.vue';
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
                     <div class="p-6 text-gray-900">
-                        <Task></Task>
+                        <task></task>
                     </div>
                 </div>
             </div>
