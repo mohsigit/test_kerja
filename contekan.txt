@@ -1,0 +1,23 @@
+1 .Service Container di Laravel adalah sebuah mekanisme yang bertindak sebagai dependency injection container dan pengelola dependensi. 
+ Dengan Service Container, Laravel dapat mengelola berbagai class dan dependensi mereka secara otomatis
+
+  1. Binding: Service Container memungkinkan pengguna untuk mendaftarkan kelas atau interface ke dalam kontainer. Misalnya, pengguna bisa mendaftarkan kelas atau layanan agar bisa dipanggil dan di-resolve oleh Laravel kapanpun dibutuhkan.
+  2. Resolving: Saat Laravel membutuhkan suatu layanan atau kelas, ia akan mencari di dalam kontainer, menyelesaikan dependensi, dan memberikan instance dari kelas yang di-bind.
+  3. Dependency Injection: Service Container menyuntikkan dependensi yang dibutuhkan suatu kelas secara otomatis, baik melalui metode constructor atau metode tertentu.
+
+2. seperti namanya middleware berada di antara request yang di gunakan oleh pengguna dan juga aplikasi pada laravel, middleware juga berfungsi sebagai penyaring, modificator dan juga executor terhadap request yang di jalankan.
+  contoh pnegunaan middleware adalah salah satunya untuk melakukan otentikasi terhadap user login.
+
+3. Eloquent ORM pada database adalah sebuah jembatan dan juga plugin dalam laravel dimana fungsinya adalah untuk mempermudah koneksi antara database dan aplikasi,untuk membuat sebuah relasi pada setiap tabel kita perlu menambahkan
+    relasinya di dalam model,entah one-to-one, one-to-many, atau many-to-many,
+    contoh nya adalah berikut : 
+pada table profile:
+public function profile()
+{
+    return $this->hasOne(Profile::class);
+}
+Pada table user
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
