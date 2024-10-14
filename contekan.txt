@@ -30,4 +30,9 @@ pada contoh di atas menggunakan one-to-one relation.
 6. Computed pada vue adlah bagian dimana vue menyimpan cache pada aplikasi contoh nya seperti jika ada merubah tittle tapi tidak dengan deskripsinya maka yang akan di muat ulang hanya tittle nya saja, dan deskripsi tidak akan di muat ulang dari database
    watch di gunakan untuk melihat perubahan pada data setelah melalui proses computed, watch sendiri bisa di gunakan untuk menamppilkan error message, atau success message pada saat kita melakukan perubahan data.
 
-7. Fungsi utama adalah membuat vue dan laravel layaknya SPA tetapi tetap menggunakan server-side routing
+7. Fungsi utama adalah membuat vue dan laravel layaknya SPA tetapi tetap menggunakan server-side routing.
+
+8. Perbedaan SPA dengan intertia dan laravel balde, terletak pada interkasi antara backend dan front end
+   1. pada laravel blade, saaat pengguna melakukan request server akan merender data dan di kirim ke html yang akan di tampilkan secara penuh di browser, dan pada blade juga jika ada perubahan pada data maka halaman akan di reload secara penuh dan tentunya membutuhkan waktu
+   2. sedangkan pada SPA dengan inertia, laravel hanya akan mengirimkan halaman yang sesuai dengan request juga ketika ada perubahan data halaman tidak akan di muat ulang, yang artinya data akan di tampilkan lebih cepat.
+9. dalam hal ini sebetulnya penggunaan nya mirip dengan laravel blade, hanya saja pada inertia state bisa di gunakan juga dengan props, jadi data pada backend data bisa langsung di kirimkan pada fornt end di vue.
