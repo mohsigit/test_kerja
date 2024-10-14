@@ -21,3 +21,13 @@ public function user()
 {
     return $this->belongsTo(User::class);
 }
+pada contoh di atas menggunakan one-to-one relation.
+
+4. perbedaan antara vue 2 dan 3 tentu cukup signifikan karena vue 3 banyak membawa fitur baru dan juga lebih fleksibel dalam penggunaan nya,fitur-fitur baru seperti API,telteport dan suspense merupakan fitur baru yang ada pada vue 3
+
+5. reactivity pada vue merupakan sebuah vitur dimana vue dapat memperbarui UI secara otomatis ketika data berubah didalam component secara mudah nya, vue tidak memerlukan loading ketika ada perubahan baik di dalam data ataupun tampilan
+
+6. Computed pada vue adlah bagian dimana vue menyimpan cache pada aplikasi contoh nya seperti jika ada merubah tittle tapi tidak dengan deskripsinya maka yang akan di muat ulang hanya tittle nya saja, dan deskripsi tidak akan di muat ulang dari database
+   watch di gunakan untuk melihat perubahan pada data setelah melalui proses computed, watch sendiri bisa di gunakan untuk menamppilkan error message, atau success message pada saat kita melakukan perubahan data.
+
+7. Fungsi utama adalah membuat vue dan laravel layaknya SPA tetapi tetap menggunakan server-side routing
